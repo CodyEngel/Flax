@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Flax</string>
+    <string name="increment_total">Increment Total</string>
+</resources>
