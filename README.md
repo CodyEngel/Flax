@@ -11,3 +11,8 @@ The renderer is responsible for taking changes from the store and helping the vi
 
 3) Store
 The store is a collection of models. Currently it will lazy load models and then store their reference in a map for easy retrevial. This should be decoupled from the view lifecycle so that it can survive configuration changes, at the moment it's a singleton, but this could change before the initial "stable" release.
+
+## The Bad Diagram
+So this diagram might not be the best... But essentially what this shows is that the store should not reference the responder or the renderer. The responder will pass data into the store, the store will store that data and then notify anything that is subscribed to it. The renderer should subscribe to the store so it can receive any updates.
+
+![alt tag](https://github.com/CodyEngel/Flax/blob/master/architecture-flow.png)
