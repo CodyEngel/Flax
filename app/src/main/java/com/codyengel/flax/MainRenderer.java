@@ -16,37 +16,20 @@
 
 package com.codyengel.flax;
 
-import com.codyengel.flax.store.Store;
-
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
+import com.codyengel.flax.flax.Renderer;
 
 /**
  * @author cody
  */
-class MainRenderer {
+class MainRenderer extends Renderer<MainModel, MainView> {
 
-    MainRenderer(MainView mainView) {
-        Store.getModel(MainModel.class).getObservable().subscribe(new Observer<MainModel>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(MainModel mainModel) {
-                mainView.setText(String.valueOf(mainModel.getValue()));
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
+    public MainRenderer(MainView view) {
+        super(view);
     }
+
+    @Override
+    protected void modelUpdated(MainModel updatedModel) {
+        getView().setText(String.valueOf(updatedModel.getValue()));
+    }
+
 }

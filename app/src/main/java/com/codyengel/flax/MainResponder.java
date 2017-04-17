@@ -16,48 +16,31 @@
 
 package com.codyengel.flax;
 
-import com.codyengel.flax.action.Action;
-import com.codyengel.flax.store.Store;
+import com.codyengel.flax.flax.Action;
+import com.codyengel.flax.flax.Responder;
 
 import java.util.Locale;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 /**
  * @author cody
  */
-public class MainResponder {
+public class MainResponder extends Responder<MainModel> {
 
     public MainResponder(Observable<Action> actions) {
-        actions.subscribe(new Observer<Action>() {
-            @Override
-            public void onSubscribe(Disposable d) {
+        super(actions);
+    }
 
-            }
-
-            @Override
-            public void onNext(Action action) {
-                switch (action.getActionType()) {
-                    case Action.CLICK:
-                        Store.<MainModel>getModel(MainModel.class).plus();
-                        break;
-                    default:
-                        throw new UnsupportedOperationException(String.format(Locale.US, "Action Type %s Not Supported", action.getActionType()));
-                }
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
+    @Override
+    protected void actionReceived(Action action) {
+        switch (action.getActionType()) {
+            case Action.CLICK:
+                getModel().plus();
+                break;
+            default:
+                throw new UnsupportedOperationException(String.format(Locale.US, "Action Type %s Not Supported", action.getActionType()));
+        }
     }
 
 }

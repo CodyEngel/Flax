@@ -14,30 +14,27 @@
  * limitations under the License.
  */
 
-package com.codyengel.flax.model;
+package com.codyengel.flax.flax;
 
-import io.reactivex.Observable;
-import io.reactivex.subjects.BehaviorSubject;
+import java.util.HashMap;
 
 /**
  * @author cody
  */
-public abstract class Model<M> {
+public class Payload {
 
-    private BehaviorSubject<M> modelSubject;
+    private HashMap<String, Object> payload;
 
-    public Model() {
-        modelSubject = BehaviorSubject.create();
-        notifyModelChanged();
+    public Payload() {
+        payload = new HashMap<>();
     }
 
-    public Observable<M> getObservable() {
-        return modelSubject;
+    public void put(String key, Object value) {
+        payload.put(key, value);
     }
 
-    protected void notifyModelChanged() {
-        //noinspection unchecked
-        modelSubject.onNext((M)this);
+    public Object get(String key) {
+        return payload.get(key);
     }
 
 }

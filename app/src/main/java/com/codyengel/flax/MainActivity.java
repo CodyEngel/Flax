@@ -21,8 +21,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.codyengel.flax.action.Action;
-import com.codyengel.flax.action.Payload;
+import com.codyengel.flax.flax.Action;
+import com.codyengel.flax.flax.Payload;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import butterknife.BindView;

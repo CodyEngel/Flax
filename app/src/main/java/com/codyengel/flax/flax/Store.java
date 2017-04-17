@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-package com.codyengel.flax.store;
-
-import com.codyengel.flax.model.Model;
+package com.codyengel.flax.flax;
 
 import java.util.HashMap;
 

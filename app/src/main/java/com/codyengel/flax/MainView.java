@@ -16,10 +16,12 @@
 
 package com.codyengel.flax;
 
+import com.codyengel.flax.flax.View;
+
 /**
  * @author cody
  */
-public interface MainView {
+public interface MainView extends View {
 
     void setText(CharSequence text);
 

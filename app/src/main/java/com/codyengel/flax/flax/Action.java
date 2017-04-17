@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.codyengel.flax.action;
+package com.codyengel.flax.flax;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.IntDef;

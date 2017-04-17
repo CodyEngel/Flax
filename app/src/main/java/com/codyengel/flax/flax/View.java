@@ -14,28 +14,10 @@
  * limitations under the License.
  */
 
-package com.codyengel.flax;
-
-import com.codyengel.flax.flax.Model;
+package com.codyengel.flax.flax;
 
 /**
  * @author cody
  */
-public class MainModel extends Model<MainModel> {
-
-    private Integer value = 0;
-
-    public MainModel() {
-        super();
-    }
-
-    void plus() {
-        value++;
-        notifyModelChanged();
-    }
-
-    Integer getValue() {
-        return value;
-    }
-
+public interface View {
 }
