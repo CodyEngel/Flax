@@ -32,10 +32,13 @@ public abstract class Responder<M extends Model> {
     private Disposable disposable;
 
     public Responder(Observable<Action> actions) {
-        actions.filter(action -> action.getActionType() != Action.NONE)
-                .subscribe(new Observer<Action>() {
+        actions.subscribe(new Observer<Action>() {
+
+            private Disposable disposable;
+
             @Override
             public void onSubscribe(Disposable disposable) {
+                this.disposable = disposable;
                 disposableCreated(disposable);
             }
 
@@ -46,11 +49,13 @@ public abstract class Responder<M extends Model> {
 
             @Override
             public void onError(Throwable error) {
+                disposable.dispose();
                 errorReceived(error);
             }
 
             @Override
             public void onComplete() {
+                disposable.dispose();
                 completed();
             }
         });

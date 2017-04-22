@@ -39,7 +39,7 @@ public class ActionObservableBuilder {
      * @return an {@link Action} {@link Observable}
      */
     public Observable<Action> build() {
-        return actionObservable;
+        return actionObservable.filter(action -> action.getActionType() != Action.NONE);
     }
 
     /**

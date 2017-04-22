@@ -16,12 +16,9 @@
 
 package com.codyengel.flax;
 
-import android.util.Log;
-
 import java.lang.reflect.ParameterizedType;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -29,35 +26,21 @@ import io.reactivex.disposables.Disposable;
  */
 public abstract class Renderer<M extends Model, V extends View> {
 
+    private Disposable disposable;
     private V view;
 
     public Renderer(V view) {
         this.view = view;
 
-        getObservable().subscribe(new Observer<M>() {
-            @Override
-            public void onSubscribe(Disposable d) {
+        disposable = getObservable().subscribe(this::modelUpdated);
 
-            }
-
-            @Override
-            public void onNext(M model) {
-                modelUpdated(model);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e(getClass().getName(), e.getMessage());
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
     }
 
     protected abstract void modelUpdated(M updatedModel);
+
+    public void dispose() {
+        disposable.dispose();
+    }
 
     protected V getView() {
         return view;

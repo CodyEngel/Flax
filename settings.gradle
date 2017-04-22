@@ -1,1 +1,1 @@
-include ':flax', ':helloflax'
+include ':flax', ':helloflax', ':simplenetworking'
