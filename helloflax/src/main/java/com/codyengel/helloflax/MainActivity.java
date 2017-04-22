@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.codyengel.flax.ActionObservableBuilder;
+import com.codyengel.flax.Renderer;
 import com.codyengel.flax.Responder;
 
 import butterknife.BindView;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @BindView(R.id.text) TextView text;
 
     private Responder responder;
+    private Renderer renderer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +45,14 @@ public class MainActivity extends AppCompatActivity implements MainView {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        new MainRenderer(this);
+        renderer = new MainRenderer(this);
         responder = new MainResponder(new ActionObservableBuilder().mapClick(button).build());
     }
 
     @Override
     protected void onDestroy() {
-        if (responder != null) {
-            responder.dispose();
-        }
+        renderer.dispose();
+        responder.dispose();
         super.onDestroy();
     }
 

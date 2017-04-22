@@ -21,7 +21,7 @@ import com.codyengel.flax.Model;
 /**
  * @author cody
  */
-public class MainModel extends Model<MainModel> {
+class MainModel extends Model<MainModel> {
 
     private Integer value = 0;
 

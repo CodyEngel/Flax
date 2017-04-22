@@ -20,7 +20,7 @@ import com.codyengel.flax.View;
 /**
  * @author cody
  */
-public interface MainView extends View {
+interface MainView extends View {
 
     void setText(CharSequence text);
 

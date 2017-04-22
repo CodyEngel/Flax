@@ -28,9 +28,9 @@ import io.reactivex.Observable;
 /**
  * @author cody
  */
-public class MainResponder extends Responder<MainModel> {
+class MainResponder extends Responder<MainModel> {
 
-    public MainResponder(Observable<Action> actions) {
+    MainResponder(Observable<Action> actions) {
         super(actions);
     }
 

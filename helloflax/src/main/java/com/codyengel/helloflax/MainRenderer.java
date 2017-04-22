@@ -23,7 +23,7 @@ import com.codyengel.flax.Renderer;
  */
 class MainRenderer extends Renderer<MainModel, MainView> {
 
-    public MainRenderer(MainView view) {
+    MainRenderer(MainView view) {
         super(view);
     }
 
