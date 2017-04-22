@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Flax.iml" filepath="$PROJECT_DIR$/Flax.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flax/flax.iml" filepath="$PROJECT_DIR$/flax/flax.iml" />
+      <module fileurl="file://$PROJECT_DIR$/helloflax/helloflax.iml" filepath="$PROJECT_DIR$/helloflax/helloflax.iml" />
     </modules>
   </component>
 </project>
