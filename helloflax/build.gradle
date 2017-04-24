@@ -22,6 +22,7 @@ ext {
     rxJavaVersion = '2.0.7'
     rxBindingVersion = '2.0.0'
     butterknifeVersion = '8.5.1'
+    espressoVersion = '2.2.2'
 }
 
 android {
@@ -54,4 +55,11 @@ dependencies {
     compile "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
     compile "com.jakewharton:butterknife:$butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+
+    androidTestCompile ("com.android.support.test.espresso:espresso-core:$espressoVersion") {
+        exclude module: 'support-annotations'
+        exclude module: 'support-v4'
+        exclude module: 'design'
+        exclude module: 'recyclerview-v7'
+    }
 }

@@ -21,7 +21,9 @@ import com.codyengel.flax.Model;
 /**
  * @author cody
  */
-class MainModel extends Model<MainModel> {
+public class MainModel extends Model<MainModel> {
+//  Public for Espresso tests, otherwise will give IllegalAccessException, feel free to make this better
+//  kind stranger on GitHub.
 
     private Integer value = 0;
 
