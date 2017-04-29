@@ -22,8 +22,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.codyengel.simplenetworking.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context="com.codyengel.simplenetworking.ui.details.UserDetailsActivity"
+    tools:showIn="@layout/activity_user_details">
 
     <TextView
         android:id="@+id/textName"

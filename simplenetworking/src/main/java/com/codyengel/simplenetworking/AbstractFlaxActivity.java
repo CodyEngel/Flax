@@ -14,52 +14,47 @@
  * limitations under the License.
  */
 
-package com.codyengel.helloflax;
+package com.codyengel.simplenetworking;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.codyengel.flax.ActionObservableBuilder;
 import com.codyengel.flax.Renderer;
 import com.codyengel.flax.Responder;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
  * @author cody
  */
-public class MainActivity extends AppCompatActivity implements MainView {
-
-    @BindView(R.id.button) Button button;
-    @BindView(R.id.text) TextView text;
+public abstract class AbstractFlaxActivity extends AppCompatActivity {
 
     private Responder responder;
     private Renderer renderer;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+    protected abstract int getContentViewId();
+    protected abstract Renderer createRenderer();
+    protected abstract Responder createResponder();
 
-        renderer = new MainRenderer(this);
-        responder = new MainResponder(new ActionObservableBuilder().mapClick(button).build());
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(getContentViewId());
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (renderer == null) renderer = createRenderer();
+        if (responder == null) responder = createResponder();
     }
 
     @Override
     protected void onDestroy() {
-        renderer.dispose();
-        responder.dispose();
+        responder.dispose(); // prevents responders from holding references to activity
+        renderer.dispose(); // prevents stale renderers from responding to model updates
         super.onDestroy();
-    }
-
-
-
-    @Override
-    public void setText(CharSequence text) {
-        this.text.setText(text);
     }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.codyengel.simplenetworking;
+package com.codyengel.simplenetworking.ui.details;
 
 import com.codyengel.flax.Renderer;
 
@@ -23,14 +23,14 @@ import static org.apache.commons.lang3.text.WordUtils.capitalize;
 /**
  * @author cody
  */
-class MainRenderer extends Renderer<MainModel, MainView> {
+class UserDetailsRenderer extends Renderer<UserDetailsModel, UserDetailsView> {
 
-    MainRenderer(MainView view) {
+    UserDetailsRenderer(UserDetailsView view) {
         super(view);
     }
 
     @Override
-    protected void modelUpdated(MainModel updatedModel) {
+    protected void modelUpdated(UserDetailsModel updatedModel) {
         setName(updatedModel.getFirstName(), updatedModel.getLastName(), updatedModel.getTitle());
         setLocation(updatedModel.getStreet(), updatedModel.getCity(), updatedModel.getState(), updatedModel.getPostCode());
         setPicture(updatedModel.getLargePicture());

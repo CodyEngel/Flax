@@ -17,6 +17,7 @@
 package com.codyengel.flax;
 
 import android.support.annotation.CallSuper;
+import android.support.annotation.Nullable;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -72,7 +73,12 @@ public abstract class Responder<M extends Model> {
     }
 
     protected M getModel() {
-        return Store.getModel(getModelClass());
+        return getModel(null);
+    }
+
+    protected M getModel(@Nullable Integer modelKey) {
+        if (modelKey == null) return Store.getModel(getModelClass());
+        return Store.getModel(getModelClass(), modelKey);
     }
 
     @CallSuper

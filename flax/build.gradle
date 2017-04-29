@@ -21,6 +21,7 @@ ext {
     supportLibraryVersion = '25.3.1'
     rxJavaVersion = '2.0.7'
     rxBindingVersion = '2.0.0'
+    junitVersion = '4.12'
 }
 
 android {
@@ -52,6 +53,8 @@ dependencies {
     compile "com.android.support:appcompat-v7:$supportLibraryVersion"
     compile "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     compile "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
+
+    testCompile "junit:junit:$junitVersion"
 }
 
 retrolambda {

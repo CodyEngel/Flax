@@ -14,39 +14,26 @@
  * limitations under the License.
  */
 
-package com.codyengel.simplenetworking;
+package com.codyengel.simplenetworking.ui.details;
 
 import android.util.Log;
 
 import com.codyengel.flax.Action;
 import com.codyengel.flax.Responder;
-import com.codyengel.simplenetworking.services.RandomUserService;
 
 import java.util.Locale;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * @author cody
  */
-class MainResponder extends Responder<MainModel> {
+class UserDetailsResponder extends Responder<UserDetailsModel> {
 
-    private RandomUserService randomUserService;
 
-    MainResponder(Observable<Action> actions) {
+    UserDetailsResponder(Observable<Action> actions, Integer userDetailsKey) {
         super(actions);
-        randomUserService = new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://randomuser.me/")
-                .build()
-                .create(RandomUserService.class);
-        loadRandomUser();
+        getModel().loadRandomUser(userDetailsKey);
     }
 
     @Override
@@ -71,15 +58,6 @@ class MainResponder extends Responder<MainModel> {
     }
 
     private void clickActionReceived(Action action) {
-        if (action.getViewId() == R.id.fab) {
-            getModel().dataIsStale();
-            loadRandomUser();
-        }
-    }
-
-    private void loadRandomUser() {
-        randomUserService.getRandomUser("us").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-            .subscribe(getModel()::randomUserResultReceived, this::logError);
     }
 
     private void logError(Throwable throwable) {

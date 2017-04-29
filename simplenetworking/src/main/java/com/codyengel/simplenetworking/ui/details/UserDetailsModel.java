@@ -14,33 +14,22 @@
  * limitations under the License.
  */
 
-package com.codyengel.simplenetworking;
+package com.codyengel.simplenetworking.ui.details;
 
 import com.codyengel.flax.Model;
-import com.codyengel.simplenetworking.services.models.RandomUserResult;
 import com.codyengel.simplenetworking.services.models.Result;
+import com.codyengel.simplenetworking.ui.UserModel;
 
 /**
  * @author cody
  */
-class MainModel extends Model<MainModel> {
+class UserDetailsModel extends Model<UserDetailsModel> {
 
     private Result randomUserResult;
-    private boolean isDataStale = true;
 
-    // Responder Related Methods
-    // We'll probably want to use something like ModelResponder, then the Responder won't interface
-    // directly with our model since it doesn't need the actual values that are being set.
-    void randomUserResultReceived(RandomUserResult randomUserResult) {
-        if (isDataStale) {
-            isDataStale = false;
-            this.randomUserResult = randomUserResult.getResults().get(0);
-            notifyModelChanged();
-        }
-    }
-
-    void dataIsStale() {
-        isDataStale = true;
+    void loadRandomUser(Integer userDetailsKey) {
+        randomUserResult = ((UserModel)getModel(UserModel.class, userDetailsKey)).userResult;
+        notifyModelChanged();
     }
 
     // Renderer Related Methods

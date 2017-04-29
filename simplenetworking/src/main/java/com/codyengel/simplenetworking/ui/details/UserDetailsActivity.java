@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.codyengel.simplenetworking;
+package com.codyengel.simplenetworking.ui.details;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,17 +26,15 @@ import com.bumptech.glide.Glide;
 import com.codyengel.flax.ActionObservableBuilder;
 import com.codyengel.flax.Renderer;
 import com.codyengel.flax.Responder;
+import com.codyengel.simplenetworking.AbstractFlaxActivity;
+import com.codyengel.simplenetworking.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author cody
  */
-public class MainActivity extends AppCompatActivity implements MainView {
-
-    private Responder responder;
-    private Renderer renderer;
+public class UserDetailsActivity extends AbstractFlaxActivity implements UserDetailsView {
 
     @BindView(R.id.imageView) ImageView imageView;
     @BindView(R.id.textLocation) TextView textLocation;
@@ -46,27 +43,24 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @BindView(R.id.fab) View floatingActionButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        prepareFLAX();
-    }
-
-    // This should be called from onCreate, this is what is needed for Flax to function
-    private void prepareFLAX() {
-        renderer = new MainRenderer(this);
-        responder = new MainResponder(new ActionObservableBuilder().mapClick(floatingActionButton).build());
     }
 
     @Override
-    protected void onDestroy() {
-        renderer.dispose(); // prevents stale renderers from responding to model updates
-        responder.dispose(); // prevents responders from holding references to activity
-        super.onDestroy();
+    protected int getContentViewId() {
+        return R.layout.activity_user_details;
+    }
+
+    @Override
+    protected Renderer createRenderer() {
+        return new UserDetailsRenderer(this);
+    }
+
+    @Override
+    protected Responder createResponder() {
+        Integer userDetailsKey = getIntent().getIntExtra("user_details_key", 0);
+        return new UserDetailsResponder(new ActionObservableBuilder().build(), userDetailsKey);
     }
 
     @Override

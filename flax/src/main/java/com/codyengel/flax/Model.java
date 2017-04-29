@@ -40,4 +40,12 @@ public abstract class Model<M> {
         modelSubject.onNext((M)this);
     }
 
+    protected<N extends Model> void putModel(N model, Integer modelKey) {
+        Store.putModel(model, modelKey);
+    }
+
+    protected<N extends Model> N getModel(Class modelClass, Integer modelKey) {
+        return Store.getModel(modelClass, modelKey);
+    }
+
 }

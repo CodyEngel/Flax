@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package com.codyengel.simplenetworking;
+package com.codyengel.simplenetworking.ui.list;
 
 import com.codyengel.flax.View;
+import com.codyengel.simplenetworking.ui.UserModel;
 
 /**
  * @author cody
  */
-public interface MainView extends View {
+interface ListView extends View {
+    void addUser(UserModel userModel);
 
-    void setName(CharSequence name);
+    void scrollToPosition(int position);
 
-    void setLocation(CharSequence location);
-
-    void setPicture(String pictureUrl);
-
-    void setPhone(String phone);
-
+    void navigateToUserProfile(Integer userProfileKey);
 }
