@@ -15,12 +15,12 @@
  */
 package com.codyengel.helloflax;
 
-import com.codyengel.flax.View;
+import com.codyengel.flax.FlaxView;
 
 /**
  * @author cody
  */
-interface MainView extends View {
+interface MainView extends FlaxView {
 
     void setText(CharSequence text);
 

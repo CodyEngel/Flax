@@ -16,12 +16,12 @@
 
 package com.codyengel.simplenetworking.ui.details;
 
-import com.codyengel.flax.View;
+import com.codyengel.flax.FlaxView;
 
 /**
  * @author cody
  */
-public interface UserDetailsView extends View {
+public interface UserDetailsView extends FlaxView {
 
     void setName(CharSequence name);
 

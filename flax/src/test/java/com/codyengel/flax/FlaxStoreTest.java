@@ -27,25 +27,25 @@ import static org.junit.Assert.assertNotEquals;
  * @author cody
  */
 @RunWith(JUnit4.class)
-public class StoreTest {
+public class FlaxStoreTest {
 
     @Test
     public void testStoreReturnsSameValueForSameKeys() throws Exception {
-        Foo fooOne = Store.getModel(Foo.class, 0);
-        Foo fooTwo = Store.getModel(Foo.class, 0);
+        Foo fooOne = FlaxStore.getModel(Foo.class, 0);
+        Foo fooTwo = FlaxStore.getModel(Foo.class, 0);
 
         assertEquals("fooOne and fooTwo should be the same but they are different.", fooOne, fooTwo);
     }
 
     @Test
     public void testStoreReturnsDifferentValuesForDifferentKeys() throws Exception {
-        Foo fooOne = Store.getModel(Foo.class, 0);
-        Foo fooTwo = Store.getModel(Foo.class, 1);
+        Foo fooOne = FlaxStore.getModel(Foo.class, 0);
+        Foo fooTwo = FlaxStore.getModel(Foo.class, 1);
 
         assertNotEquals("fooOne and fooTwo should be different but they are the same.", fooOne, fooTwo);
     }
 
-    private static class Foo extends Model<Foo> {
+    private static class Foo extends FlaxModel<Foo> {
         public Foo() {
             super();
         }

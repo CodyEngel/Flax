@@ -18,8 +18,8 @@ package com.codyengel.simplenetworking.ui.list;
 
 import android.util.Log;
 
-import com.codyengel.flax.Action;
-import com.codyengel.flax.Responder;
+import com.codyengel.flax.FlaxAction;
+import com.codyengel.flax.FlaxResponder;
 import com.codyengel.simplenetworking.R;
 import com.codyengel.simplenetworking.services.RandomUserService;
 import com.codyengel.simplenetworking.ui.UserModel;
@@ -36,11 +36,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * @author cody
  */
-class ListResponder extends Responder<ListModel> {
+class ListResponder extends FlaxResponder<ListModel> {
 
     private RandomUserService randomUserService;
 
-    ListResponder(Observable<Action> actions) {
+    ListResponder(Observable<FlaxAction> actions) {
         super(actions);
         randomUserService = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -51,19 +51,19 @@ class ListResponder extends Responder<ListModel> {
     }
 
     @Override
-    protected void actionReceived(Action action) {
-        switch(action.getActionType()) {
-            case Action.CLICK:
-                clickActionReceived(action);
+    protected void actionReceived(FlaxAction flaxAction) {
+        switch(flaxAction.getActionType()) {
+            case FlaxAction.CLICK:
+                clickActionReceived(flaxAction);
                 break;
             case ListActivity.ACTION_LIST_CLICKED:
-                listClickActionReceived(action);
+                listClickActionReceived(flaxAction);
                 break;
             case ListActivity.ACTION_START_ACTIVITY:
                 startActivityReceived();
                 break;
             default:
-                throw new UnsupportedOperationException(String.format(Locale.US, "Action type %d not supported.", action.getActionType()));
+                throw new UnsupportedOperationException(String.format(Locale.US, "FlaxAction type %d not supported.", flaxAction.getActionType()));
         }
     }
 
@@ -73,8 +73,8 @@ class ListResponder extends Responder<ListModel> {
     @Override
     protected void completed() {}
 
-    private void listClickActionReceived(Action action) {
-        UserModel userModel = (UserModel) action.getPayload().get("user_model");
+    private void listClickActionReceived(FlaxAction flaxAction) {
+        UserModel userModel = (UserModel) flaxAction.getFlaxPayload().get("user_model");
         getModel().userSelected(userModel);
     }
 
@@ -82,8 +82,8 @@ class ListResponder extends Responder<ListModel> {
         getModel().userSelected(null);
     }
 
-    private void clickActionReceived(Action action) {
-        if (action.getViewId() == R.id.fab) {
+    private void clickActionReceived(FlaxAction flaxAction) {
+        if (flaxAction.getViewId() == R.id.fab) {
             loadRandomUser();
         }
     }

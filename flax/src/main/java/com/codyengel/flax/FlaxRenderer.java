@@ -24,12 +24,12 @@ import io.reactivex.disposables.Disposable;
 /**
  * @author cody
  */
-public abstract class Renderer<M extends Model, V extends View> {
+public abstract class FlaxRenderer<M extends FlaxModel, V extends FlaxView> {
 
     private Disposable disposable;
     private V view;
 
-    public Renderer(V view) {
+    public FlaxRenderer(V view) {
         this.view = view;
 
         disposable = getObservable().subscribe(this::modelUpdated);
@@ -52,7 +52,7 @@ public abstract class Renderer<M extends Model, V extends View> {
     }
 
     private M getModel() {
-        return Store.getModel(getModelClass());
+        return FlaxStore.getModel(getModelClass());
     }
 
     private Class getModelClass() {

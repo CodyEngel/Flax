@@ -18,8 +18,8 @@ package com.codyengel.helloflax;
 
 import android.util.Log;
 
-import com.codyengel.flax.Action;
-import com.codyengel.flax.Responder;
+import com.codyengel.flax.FlaxAction;
+import com.codyengel.flax.FlaxResponder;
 
 import java.util.Locale;
 
@@ -28,22 +28,22 @@ import io.reactivex.Observable;
 /**
  * @author cody
  */
-class MainResponder extends Responder<MainModel> {
+class MainResponder extends FlaxResponder<MainModel> {
 
-    MainResponder(Observable<Action> actions) {
+    MainResponder(Observable<FlaxAction> actions) {
         super(actions);
     }
 
     @Override
-    protected void actionReceived(Action action) {
-        switch (action.getActionType()) {
-            case Action.CLICK:
-                if (action.getViewId() == R.id.button) {
+    protected void actionReceived(FlaxAction flaxAction) {
+        switch (flaxAction.getActionType()) {
+            case FlaxAction.CLICK:
+                if (flaxAction.getViewId() == R.id.button) {
                     getModel().plus();
                 }
                 break;
             default:
-                throw new UnsupportedOperationException(String.format(Locale.US, "Action Type %s Not Supported", action.getActionType()));
+                throw new UnsupportedOperationException(String.format(Locale.US, "FlaxAction Type %s Not Supported", flaxAction.getActionType()));
         }
     }
 

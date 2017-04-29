@@ -16,7 +16,7 @@
 
 package com.codyengel.simplenetworking.ui.list;
 
-import com.codyengel.flax.Renderer;
+import com.codyengel.flax.FlaxRenderer;
 import com.codyengel.simplenetworking.ui.UserModel;
 
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * @author cody
  */
-class ListRenderer extends Renderer<ListModel, ListView> {
+class ListRenderer extends FlaxRenderer<ListModel, ListView> {
 
     private int usersAdded = 0;
 

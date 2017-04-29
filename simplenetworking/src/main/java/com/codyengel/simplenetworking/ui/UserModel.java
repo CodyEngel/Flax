@@ -16,14 +16,14 @@
 
 package com.codyengel.simplenetworking.ui;
 
-import com.codyengel.flax.Model;
+import com.codyengel.flax.FlaxModel;
 import com.codyengel.simplenetworking.services.models.Result;
 
 /**
  * @author cody
  */
 
-public class UserModel extends Model<UserModel> {
+public class UserModel extends FlaxModel<UserModel> {
     public final String name;
     public final String phone;
     public final String thumbnail;

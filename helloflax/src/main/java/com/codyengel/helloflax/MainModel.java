@@ -16,12 +16,12 @@
 
 package com.codyengel.helloflax;
 
-import com.codyengel.flax.Model;
+import com.codyengel.flax.FlaxModel;
 
 /**
  * @author cody
  */
-public class MainModel extends Model<MainModel> {
+public class MainModel extends FlaxModel<MainModel> {
 //  Public for Espresso tests, otherwise will give IllegalAccessException, feel free to make this better
 //  kind stranger on GitHub.
 

@@ -4,7 +4,7 @@ Flax is another way to build Android applications.
 Currently this project is still evolving into a library which can be easily used in Android projects. The idea is add layers between your UI and the underlying models. With that, your "view" (Activity, Fragment, View, ViewController, etc) is where things start and it branches out into two directions.
 
 1) Responder -> Store
-The responder is responsible for responding to actions/events which are coming from your view. These actions can be anything from activity lifecycle to a user entering their username and password. From there the responder parses/massages the action into something that's useable by the store (which contains all your models).
+The responder is responsible for responding to actions/events which are coming from your view. These actions can be anything from activity lifecycle to a user entering their username and password. From there the responder parses/massages the flaxAction into something that's useable by the store (which contains all your models).
 
 2) Renderer -> Store
 The renderer is responsible for taking changes from the store and helping the view render that data. It should listen to the store for changes and when any changes are made it should invoke the appropriate view methods.
@@ -84,15 +84,15 @@ class MainResponder extends Responder<MainModel> {
     }
 
     @Override
-    protected void actionReceived(Action action) {
-        switch (action.getActionType()) {
+    protected void actionReceived(Action flaxAction) {
+        switch (flaxAction.getActionType()) {
             case Action.CLICK:
-                if (action.getViewId() == R.id.button) {
+                if (flaxAction.getViewId() == R.id.button) {
                     getModel().plus();
                 }
                 break;
             default:
-                throw new UnsupportedOperationException(String.format(Locale.US, "Action Type %s Not Supported", action.getActionType()));
+                throw new UnsupportedOperationException(String.format(Locale.US, "Action Type %s Not Supported", flaxAction.getActionType()));
         }
     }
 

@@ -23,9 +23,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.codyengel.flax.ActionObservableBuilder;
-import com.codyengel.flax.Renderer;
-import com.codyengel.flax.Responder;
+import com.codyengel.flax.FlaxActionObservableBuilder;
+import com.codyengel.flax.FlaxRenderer;
+import com.codyengel.flax.FlaxResponder;
 import com.codyengel.simplenetworking.AbstractFlaxActivity;
 import com.codyengel.simplenetworking.R;
 
@@ -53,14 +53,14 @@ public class UserDetailsActivity extends AbstractFlaxActivity implements UserDet
     }
 
     @Override
-    protected Renderer createRenderer() {
+    protected FlaxRenderer createRenderer() {
         return new UserDetailsRenderer(this);
     }
 
     @Override
-    protected Responder createResponder() {
+    protected FlaxResponder createResponder() {
         Integer userDetailsKey = getIntent().getIntExtra("user_details_key", 0);
-        return new UserDetailsResponder(new ActionObservableBuilder().build(), userDetailsKey);
+        return new UserDetailsResponder(new FlaxActionObservableBuilder().build(), userDetailsKey);
     }
 
     @Override

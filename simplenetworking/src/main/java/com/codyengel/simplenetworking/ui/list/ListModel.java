@@ -16,7 +16,7 @@
 
 package com.codyengel.simplenetworking.ui.list;
 
-import com.codyengel.flax.Model;
+import com.codyengel.flax.FlaxModel;
 import com.codyengel.simplenetworking.services.models.RandomUserResult;
 import com.codyengel.simplenetworking.services.models.Result;
 import com.codyengel.simplenetworking.ui.UserModel;
@@ -29,7 +29,7 @@ import static org.apache.commons.lang3.text.WordUtils.capitalize;
 /**
  * @author cody
  */
-class ListModel extends Model<ListModel> {
+class ListModel extends FlaxModel<ListModel> {
 
     private List<UserModel> users;
     private UserModel selectedUser = null;

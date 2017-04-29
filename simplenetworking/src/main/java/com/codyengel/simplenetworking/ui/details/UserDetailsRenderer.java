@@ -16,14 +16,14 @@
 
 package com.codyengel.simplenetworking.ui.details;
 
-import com.codyengel.flax.Renderer;
+import com.codyengel.flax.FlaxRenderer;
 
 import static org.apache.commons.lang3.text.WordUtils.capitalize;
 
 /**
  * @author cody
  */
-class UserDetailsRenderer extends Renderer<UserDetailsModel, UserDetailsView> {
+class UserDetailsRenderer extends FlaxRenderer<UserDetailsModel, UserDetailsView> {
 
     UserDetailsRenderer(UserDetailsView view) {
         super(view);

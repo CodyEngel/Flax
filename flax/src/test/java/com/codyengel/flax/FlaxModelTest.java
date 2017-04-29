@@ -25,13 +25,13 @@ import io.reactivex.observers.TestObserver;
 /**
  * @author cody
  */
-public class ModelTest {
+public class FlaxModelTest {
 
-    private Model model;
+    private FlaxModel flaxModel;
 
     @Before
     public void setUp() throws Exception {
-        model = new Model() {
+        flaxModel = new FlaxModel() {
             @Override
             Observable getObservable() {
                 return super.getObservable();
@@ -46,14 +46,14 @@ public class ModelTest {
 
     @Test
     public void testNotifyModelChanged() throws Exception {
-        TestObserver testSubscriber = model.getObservable().test();
+        TestObserver testSubscriber = flaxModel.getObservable().test();
 
-        model.notifyModelChanged();
-        model.notifyModelChanged();
+        flaxModel.notifyModelChanged();
+        flaxModel.notifyModelChanged();
 
-        // 3 values because the constructor of Model will call notifyModelChanged
+        // 3 values because the constructor of FlaxModel will call notifyModelChanged
         testSubscriber.assertValueCount(3);
-        testSubscriber.assertValues(model, model, model);
+        testSubscriber.assertValues(flaxModel, flaxModel, flaxModel);
     }
 
 }

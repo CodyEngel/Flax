@@ -16,12 +16,12 @@
 
 package com.codyengel.helloflax;
 
-import com.codyengel.flax.Renderer;
+import com.codyengel.flax.FlaxRenderer;
 
 /**
  * @author cody
  */
-class MainRenderer extends Renderer<MainModel, MainView> {
+class MainRenderer extends FlaxRenderer<MainModel, MainView> {
 
     MainRenderer(MainView view) {
         super(view);

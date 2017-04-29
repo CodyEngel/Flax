@@ -16,14 +16,14 @@
 
 package com.codyengel.simplenetworking.ui.details;
 
-import com.codyengel.flax.Model;
+import com.codyengel.flax.FlaxModel;
 import com.codyengel.simplenetworking.services.models.Result;
 import com.codyengel.simplenetworking.ui.UserModel;
 
 /**
  * @author cody
  */
-class UserDetailsModel extends Model<UserDetailsModel> {
+class UserDetailsModel extends FlaxModel<UserDetailsModel> {
 
     private Result randomUserResult;
 
@@ -32,8 +32,8 @@ class UserDetailsModel extends Model<UserDetailsModel> {
         notifyModelChanged();
     }
 
-    // Renderer Related Methods
-    // We'll probably want to use something like ModelRenderer, then the Renderer won't interface
+    // FlaxRenderer Related Methods
+    // We'll probably want to use something like ModelRenderer, then the FlaxRenderer won't interface
     // directly with our model since it doesn't need to call void the void methods found above.
 
     String getTitle() {

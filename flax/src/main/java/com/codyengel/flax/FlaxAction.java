@@ -19,7 +19,7 @@ package com.codyengel.flax;
 /**
  * @author cody
  */
-public class Action {
+public class FlaxAction {
 
     public static final int SYSTEM_ACTION = -1;
 
@@ -41,24 +41,24 @@ public class Action {
 
     private final int actionType;
     private final int viewId;
-    private final Payload payload;
+    private final FlaxPayload flaxPayload;
 
-    public Action(int actionType) {
+    public FlaxAction(int actionType) {
         this(actionType, SYSTEM_ACTION);
     }
 
-    public Action(int actionType, Payload payload) {
-        this(actionType, SYSTEM_ACTION, payload);
+    public FlaxAction(int actionType, FlaxPayload flaxPayload) {
+        this(actionType, SYSTEM_ACTION, flaxPayload);
     }
 
-    public Action(int actionType, int viewId) {
-        this(actionType, viewId, new Payload());
+    public FlaxAction(int actionType, int viewId) {
+        this(actionType, viewId, new FlaxPayload());
     }
 
-    public Action(int actionType, int viewId, Payload payload) {
+    public FlaxAction(int actionType, int viewId, FlaxPayload flaxPayload) {
         this.actionType = actionType;
         this.viewId = viewId;
-        this.payload = payload;
+        this.flaxPayload = flaxPayload;
     }
 
     public final int getActionType() {
@@ -69,8 +69,8 @@ public class Action {
         return viewId;
     }
 
-    public final Payload getPayload() {
-        return payload;
+    public final FlaxPayload getFlaxPayload() {
+        return flaxPayload;
     }
 
 }

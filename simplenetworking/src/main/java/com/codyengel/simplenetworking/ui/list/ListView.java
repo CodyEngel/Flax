@@ -16,13 +16,13 @@
 
 package com.codyengel.simplenetworking.ui.list;
 
-import com.codyengel.flax.View;
+import com.codyengel.flax.FlaxView;
 import com.codyengel.simplenetworking.ui.UserModel;
 
 /**
  * @author cody
  */
-interface ListView extends View {
+interface ListView extends FlaxView {
     void addUser(UserModel userModel);
 
     void scrollToPosition(int position);

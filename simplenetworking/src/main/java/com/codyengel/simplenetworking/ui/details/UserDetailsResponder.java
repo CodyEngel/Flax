@@ -18,8 +18,8 @@ package com.codyengel.simplenetworking.ui.details;
 
 import android.util.Log;
 
-import com.codyengel.flax.Action;
-import com.codyengel.flax.Responder;
+import com.codyengel.flax.FlaxAction;
+import com.codyengel.flax.FlaxResponder;
 
 import java.util.Locale;
 
@@ -28,22 +28,22 @@ import io.reactivex.Observable;
 /**
  * @author cody
  */
-class UserDetailsResponder extends Responder<UserDetailsModel> {
+class UserDetailsResponder extends FlaxResponder<UserDetailsModel> {
 
 
-    UserDetailsResponder(Observable<Action> actions, Integer userDetailsKey) {
+    UserDetailsResponder(Observable<FlaxAction> actions, Integer userDetailsKey) {
         super(actions);
         getModel().loadRandomUser(userDetailsKey);
     }
 
     @Override
-    protected void actionReceived(Action action) {
-        switch(action.getActionType()) {
-            case Action.CLICK:
-                clickActionReceived(action);
+    protected void actionReceived(FlaxAction flaxAction) {
+        switch(flaxAction.getActionType()) {
+            case FlaxAction.CLICK:
+                clickActionReceived(flaxAction);
                 break;
             default:
-                throw new UnsupportedOperationException(String.format(Locale.US, "Action type %d not supported.", action.getActionType()));
+                throw new UnsupportedOperationException(String.format(Locale.US, "FlaxAction type %d not supported.", flaxAction.getActionType()));
         }
     }
 
@@ -57,7 +57,7 @@ class UserDetailsResponder extends Responder<UserDetailsModel> {
         Log.i(getClass().getName(), "COMPLETED");
     }
 
-    private void clickActionReceived(Action action) {
+    private void clickActionReceived(FlaxAction flaxAction) {
     }
 
     private void logError(Throwable throwable) {

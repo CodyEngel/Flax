@@ -24,8 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.codyengel.flax.Action;
-import com.codyengel.flax.Payload;
+import com.codyengel.flax.FlaxAction;
+import com.codyengel.flax.FlaxPayload;
 import com.codyengel.simplenetworking.R;
 import com.codyengel.simplenetworking.ui.UserModel;
 
@@ -45,14 +45,14 @@ class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder> {
 
     private List<UserModel> userModels;
 
-    private Subject<Action> clickActionSubject;
+    private Subject<FlaxAction> clickActionSubject;
 
     ListAdapter() {
         userModels = new ArrayList<>();
         clickActionSubject = PublishSubject.create();
     }
 
-    Observable<Action> getObservable() {
+    Observable<FlaxAction> getObservable() {
         return clickActionSubject;
     }
 
@@ -88,9 +88,9 @@ class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder> {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(v -> {
-                Payload userPayload = new Payload();
-                userPayload.put("user_model", userModels.get(getAdapterPosition()));
-                clickActionSubject.onNext(new Action(ListActivity.ACTION_LIST_CLICKED, userPayload));
+                FlaxPayload userFlaxPayload = new FlaxPayload();
+                userFlaxPayload.put("user_model", userModels.get(getAdapterPosition()));
+                clickActionSubject.onNext(new FlaxAction(ListActivity.ACTION_LIST_CLICKED, userFlaxPayload));
             });
         }
     }

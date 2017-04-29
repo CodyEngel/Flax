@@ -22,11 +22,11 @@ import io.reactivex.subjects.BehaviorSubject;
 /**
  * @author cody
  */
-public abstract class Model<M> {
+public abstract class FlaxModel<M> {
 
     private BehaviorSubject<M> modelSubject;
 
-    public Model() {
+    public FlaxModel() {
         modelSubject = BehaviorSubject.create();
         notifyModelChanged();
     }
@@ -40,12 +40,12 @@ public abstract class Model<M> {
         modelSubject.onNext((M)this);
     }
 
-    protected<N extends Model> void putModel(N model, Integer modelKey) {
-        Store.putModel(model, modelKey);
+    protected<N extends FlaxModel> void putModel(N model, Integer modelKey) {
+        FlaxStore.putModel(model, modelKey);
     }
 
-    protected<N extends Model> N getModel(Class modelClass, Integer modelKey) {
-        return Store.getModel(modelClass, modelKey);
+    protected<N extends FlaxModel> N getModel(Class modelClass, Integer modelKey) {
+        return FlaxStore.getModel(modelClass, modelKey);
     }
 
 }

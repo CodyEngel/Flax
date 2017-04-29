@@ -16,25 +16,8 @@
 
 package com.codyengel.flax;
 
-import java.util.HashMap;
-
 /**
  * @author cody
  */
-public class Payload {
-
-    private HashMap<String, Object> payload;
-
-    public Payload() {
-        payload = new HashMap<>();
-    }
-
-    public void put(String key, Object value) {
-        payload.put(key, value);
-    }
-
-    public Object get(String key) {
-        return payload.get(key);
-    }
-
+public interface FlaxView {
 }

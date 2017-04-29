@@ -22,24 +22,24 @@ import java.util.Map;
 /**
  * @author cody
  */
-class Store {
+class FlaxStore {
 
-    private Map<Class, Map<Integer, Model>> modelStore;
+    private Map<Class, Map<Integer, FlaxModel>> modelStore;
 
-    private static Store instance;
+    private static FlaxStore instance;
 
-    private Store() {
+    private FlaxStore() {
         modelStore = new HashMap<>();
     }
 
-    static<M extends Model> M getModel(Class modelClass) {
+    static<M extends FlaxModel> M getModel(Class modelClass) {
         return getModel(modelClass, 0);
     }
 
-    static<M extends Model> M getModel(Class modelClass, Integer modelKey) {
+    static<M extends FlaxModel> M getModel(Class modelClass, Integer modelKey) {
         if (!getModelStore().containsKey(modelClass)) {
-            // SparseArray creates different model for Responder and Renderer which breaks the idea
-            // of having a single model for each Responder and Renderer.
+            // SparseArray creates different model for FlaxResponder and FlaxRenderer which breaks the idea
+            // of having a single model for each FlaxResponder and FlaxRenderer.
             getModelStore().put(modelClass, new HashMap<>());
         }
 
@@ -55,7 +55,7 @@ class Store {
         return (M) getModelStore().get(modelClass).get(modelKey);
     }
 
-    static<M extends Model> void putModel(M model, Integer modelKey) {
+    static<M extends FlaxModel> void putModel(M model, Integer modelKey) {
         Class modelClass = model.getClass();
 
         if (!getModelStore().containsKey(modelClass)) {
@@ -65,13 +65,13 @@ class Store {
         getModelStore().get(modelClass).put(modelKey, model);
     }
 
-    private static Map<Class, Map<Integer, Model>> getModelStore() {
+    private static Map<Class, Map<Integer, FlaxModel>> getModelStore() {
         return get().modelStore;
     }
 
-    private static Store get() {
+    private static FlaxStore get() {
         if (instance == null) {
-            instance = new Store();
+            instance = new FlaxStore();
         }
         return instance;
     }

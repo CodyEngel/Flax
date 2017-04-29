@@ -28,12 +28,12 @@ import io.reactivex.disposables.Disposable;
 /**
  * @author cody
  */
-public abstract class Responder<M extends Model> {
+public abstract class FlaxResponder<M extends FlaxModel> {
 
     private Disposable disposable;
 
-    public Responder(Observable<Action> actions) {
-        actions.subscribe(new Observer<Action>() {
+    public FlaxResponder(Observable<FlaxAction> actions) {
+        actions.subscribe(new Observer<FlaxAction>() {
 
             private Disposable disposable;
 
@@ -44,8 +44,8 @@ public abstract class Responder<M extends Model> {
             }
 
             @Override
-            public void onNext(Action action) {
-                actionReceived(action);
+            public void onNext(FlaxAction flaxAction) {
+                actionReceived(flaxAction);
             }
 
             @Override
@@ -62,7 +62,7 @@ public abstract class Responder<M extends Model> {
         });
     }
 
-    protected abstract void actionReceived(Action action);
+    protected abstract void actionReceived(FlaxAction flaxAction);
 
     protected abstract void errorReceived(Throwable error);
 
@@ -77,8 +77,8 @@ public abstract class Responder<M extends Model> {
     }
 
     protected M getModel(@Nullable Integer modelKey) {
-        if (modelKey == null) return Store.getModel(getModelClass());
-        return Store.getModel(getModelClass(), modelKey);
+        if (modelKey == null) return FlaxStore.getModel(getModelClass());
+        return FlaxStore.getModel(getModelClass(), modelKey);
     }
 
     @CallSuper

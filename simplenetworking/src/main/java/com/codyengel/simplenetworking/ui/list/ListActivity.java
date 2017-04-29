@@ -23,10 +23,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.codyengel.flax.Action;
-import com.codyengel.flax.ActionObservableBuilder;
-import com.codyengel.flax.Renderer;
-import com.codyengel.flax.Responder;
+import com.codyengel.flax.FlaxAction;
+import com.codyengel.flax.FlaxActionObservableBuilder;
+import com.codyengel.flax.FlaxRenderer;
+import com.codyengel.flax.FlaxResponder;
 import com.codyengel.simplenetworking.AbstractFlaxActivity;
 import com.codyengel.simplenetworking.R;
 import com.codyengel.simplenetworking.ui.UserModel;
@@ -44,7 +44,7 @@ public class ListActivity extends AbstractFlaxActivity implements ListView {
     public static final int ACTION_START_ACTIVITY = 9001;
     public static final int ACTION_LIST_CLICKED = 9000;
 
-    private PublishSubject<Action> activitySubject;
+    private PublishSubject<FlaxAction> activitySubject;
 
     private ListAdapter listAdapter;
 
@@ -63,7 +63,7 @@ public class ListActivity extends AbstractFlaxActivity implements ListView {
 
     @Override
     public void startActivity(Intent intent) {
-        activitySubject.onNext(new Action(ACTION_START_ACTIVITY));
+        activitySubject.onNext(new FlaxAction(ACTION_START_ACTIVITY));
         super.startActivity(intent);
     }
 
@@ -73,13 +73,13 @@ public class ListActivity extends AbstractFlaxActivity implements ListView {
     }
 
     @Override
-    protected Renderer createRenderer() {
+    protected FlaxRenderer createRenderer() {
         return new ListRenderer(this);
     }
 
     @Override
-    protected Responder createResponder() {
-        Observable<Action> actionObservable = new ActionObservableBuilder().mapClick(fab).build()
+    protected FlaxResponder createResponder() {
+        Observable<FlaxAction> actionObservable = new FlaxActionObservableBuilder().mapClick(fab).build()
                 .mergeWith(listAdapter.getObservable())
                 .mergeWith(activitySubject);
         return new ListResponder(actionObservable);

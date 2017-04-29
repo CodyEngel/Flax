@@ -20,8 +20,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.codyengel.flax.Renderer;
-import com.codyengel.flax.Responder;
+import com.codyengel.flax.FlaxRenderer;
+import com.codyengel.flax.FlaxResponder;
 
 import butterknife.ButterKnife;
 
@@ -30,12 +30,12 @@ import butterknife.ButterKnife;
  */
 public abstract class AbstractFlaxActivity extends AppCompatActivity {
 
-    private Responder responder;
-    private Renderer renderer;
+    private FlaxResponder flaxResponder;
+    private FlaxRenderer flaxRenderer;
 
     protected abstract int getContentViewId();
-    protected abstract Renderer createRenderer();
-    protected abstract Responder createResponder();
+    protected abstract FlaxRenderer createRenderer();
+    protected abstract FlaxResponder createResponder();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,14 +47,14 @@ public abstract class AbstractFlaxActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (renderer == null) renderer = createRenderer();
-        if (responder == null) responder = createResponder();
+        if (flaxRenderer == null) flaxRenderer = createRenderer();
+        if (flaxResponder == null) flaxResponder = createResponder();
     }
 
     @Override
     protected void onDestroy() {
-        responder.dispose(); // prevents responders from holding references to activity
-        renderer.dispose(); // prevents stale renderers from responding to model updates
+        flaxResponder.dispose(); // prevents responders from holding references to activity
+        flaxRenderer.dispose(); // prevents stale renderers from responding to model updates
         super.onDestroy();
     }
 }
