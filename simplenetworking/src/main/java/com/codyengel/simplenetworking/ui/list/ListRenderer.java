@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * @author cody
  */
-class ListRenderer extends FlaxRenderer<ListModel, ListView> {
+class ListRenderer extends FlaxRenderer<ListModel, ListView, ListModel.ListFlaxState> {
 
     private int usersAdded = 0;
 
@@ -33,9 +33,9 @@ class ListRenderer extends FlaxRenderer<ListModel, ListView> {
     }
 
     @Override
-    protected void modelUpdated(ListModel updatedModel) {
-        insertNewUsers(updatedModel.getUsers());
-        navigateToUserProfile(updatedModel.getSelectedUser());
+    protected void modelUpdated(ListModel.ListFlaxState updatedFlaxState) {
+        insertNewUsers(updatedFlaxState.users);
+        navigateToUserProfile(updatedFlaxState.selectedUser);
     }
 
     private void navigateToUserProfile(UserModel userModel) {

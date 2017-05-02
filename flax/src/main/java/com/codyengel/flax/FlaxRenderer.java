@@ -24,7 +24,7 @@ import io.reactivex.disposables.Disposable;
 /**
  * @author cody
  */
-public abstract class FlaxRenderer<M extends FlaxModel, V extends FlaxView> {
+public abstract class FlaxRenderer<M extends FlaxModel, V extends FlaxView, FS extends FlaxState> {
 
     private Disposable disposable;
     private V view;
@@ -36,7 +36,7 @@ public abstract class FlaxRenderer<M extends FlaxModel, V extends FlaxView> {
 
     }
 
-    protected abstract void modelUpdated(M updatedModel);
+    protected abstract void modelUpdated(FS updatedFlaxState);
 
     public void dispose() {
         disposable.dispose();
@@ -46,7 +46,7 @@ public abstract class FlaxRenderer<M extends FlaxModel, V extends FlaxView> {
         return view;
     }
 
-    private Observable<M> getObservable() {
+    private Observable<FS> getObservable() {
         //noinspection unchecked
         return getModel().getObservable();
     }

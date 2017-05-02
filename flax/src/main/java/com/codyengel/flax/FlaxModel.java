@@ -22,22 +22,24 @@ import io.reactivex.subjects.BehaviorSubject;
 /**
  * @author cody
  */
-public abstract class FlaxModel<M> {
+public abstract class FlaxModel<M extends FlaxModel, FS extends FlaxState> {
 
-    private BehaviorSubject<M> modelSubject;
+    private BehaviorSubject<FS> modelSubject;
 
     public FlaxModel() {
         modelSubject = BehaviorSubject.create();
         notifyModelChanged();
     }
 
-    Observable<M> getObservable() {
+    protected abstract FS getFlaxState();
+
+    Observable<FS> getObservable() {
         return modelSubject;
     }
 
     protected void notifyModelChanged() {
         //noinspection unchecked
-        modelSubject.onNext((M)this);
+        modelSubject.onNext(getFlaxState());
     }
 
     protected<N extends FlaxModel> void putModel(N model, Integer modelKey) {

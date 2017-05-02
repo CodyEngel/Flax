@@ -56,8 +56,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
         super.onDestroy();
     }
 
-
-
     @Override
     public void setText(CharSequence text) {
         this.text.setText(text);

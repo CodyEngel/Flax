@@ -16,12 +16,16 @@
 
 package com.codyengel.simplenetworking.ui.list;
 
+import android.support.annotation.Nullable;
+
 import com.codyengel.flax.FlaxModel;
+import com.codyengel.flax.FlaxState;
 import com.codyengel.simplenetworking.services.models.RandomUserResult;
 import com.codyengel.simplenetworking.services.models.Result;
 import com.codyengel.simplenetworking.ui.UserModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.apache.commons.lang3.text.WordUtils.capitalize;
@@ -29,7 +33,7 @@ import static org.apache.commons.lang3.text.WordUtils.capitalize;
 /**
  * @author cody
  */
-class ListModel extends FlaxModel<ListModel> {
+class ListModel extends FlaxModel<ListModel, ListModel.ListFlaxState> {
 
     private List<UserModel> users;
     private UserModel selectedUser = null;
@@ -37,6 +41,11 @@ class ListModel extends FlaxModel<ListModel> {
     public ListModel() {
         super();
         users = new ArrayList<>();
+    }
+
+    @Override
+    protected ListFlaxState getFlaxState() {
+        return new ListFlaxState(users, selectedUser);
     }
 
     void randomUserReceived(RandomUserResult randomUserResult) {
@@ -54,11 +63,14 @@ class ListModel extends FlaxModel<ListModel> {
         notifyModelChanged();
     }
 
-    List<UserModel> getUsers() {
-        return users;
-    }
+    class ListFlaxState implements FlaxState<ListFlaxState> {
 
-    UserModel getSelectedUser() {
-        return selectedUser;
+        final List<UserModel> users;
+        final UserModel selectedUser;
+
+        ListFlaxState(@Nullable List<UserModel> users, @Nullable UserModel selectedUser) {
+            this.users = users == null ? new ArrayList<>() : Collections.unmodifiableList(users);
+            this.selectedUser = selectedUser;
+        }
     }
 }

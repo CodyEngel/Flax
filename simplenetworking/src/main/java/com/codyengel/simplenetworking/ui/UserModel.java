@@ -17,13 +17,15 @@
 package com.codyengel.simplenetworking.ui;
 
 import com.codyengel.flax.FlaxModel;
+import com.codyengel.flax.FlaxState;
 import com.codyengel.simplenetworking.services.models.Result;
 
 /**
  * @author cody
  */
-
-public class UserModel extends FlaxModel<UserModel> {
+public class UserModel extends FlaxModel<UserModel, UserModel.TempFlaxState> {
+    // TODO: 5/1/17 so this model ends up showing up in the list adapter and is passed back when the adapter is clicked, we should probably just use a POJO for that
+    // This is currently being added to the Store which is why it's a FlaxModel.
     public final String name;
     public final String phone;
     public final String thumbnail;
@@ -56,5 +58,14 @@ public class UserModel extends FlaxModel<UserModel> {
         result = 31 * result + thumbnail.hashCode();
         result = 31 * result + userResult.hashCode();
         return result;
+    }
+
+    @Override
+    protected TempFlaxState getFlaxState() {
+        return new TempFlaxState();
+    }
+
+    class TempFlaxState implements FlaxState<TempFlaxState> {
+        // TODO: 5/1/17 delete me once this is converted to a POJO
     }
 }

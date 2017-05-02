@@ -31,7 +31,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
-        versionName "0.0.1"
+        versionName "0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -57,7 +57,7 @@ dependencies {
     testCompile "junit:junit:$junitVersion"
 }
 
-retrolambda {
+retrolambda { // this is only temporary, needs to be removed before we exit "developer preview"
     javaVersion JavaVersion.VERSION_1_7
     jvmArgs '-noverify'
     defaultMethods false

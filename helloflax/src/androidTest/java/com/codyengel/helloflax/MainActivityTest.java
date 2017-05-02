@@ -46,18 +46,19 @@ public class MainActivityTest {
     @Test
     public void changeText_sameActivity() throws Exception {
         activityRule.launchActivity(null);
+        checkText("0");
 
-        performClicks(5);
-        checkText("5");
+        performClicks(3);
+        checkText("3");
 
         rotateScreen();
-        checkText("5");
+        checkText("3");
 
         performClicks(4);
-        checkText("9");
+        checkText("7");
 
         rotateScreen();
-        checkText("9");
+        checkText("7");
     }
 
     private void performClicks(int clicks) {

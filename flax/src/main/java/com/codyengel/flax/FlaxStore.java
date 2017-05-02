@@ -16,12 +16,15 @@
 
 package com.codyengel.flax;
 
+import android.annotation.SuppressLint;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author cody
  */
+@SuppressLint("UseSparseArrays")
 class FlaxStore {
 
     private Map<Class, Map<Integer, FlaxModel>> modelStore;

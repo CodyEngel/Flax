@@ -23,18 +23,18 @@ import static org.apache.commons.lang3.text.WordUtils.capitalize;
 /**
  * @author cody
  */
-class UserDetailsRenderer extends FlaxRenderer<UserDetailsModel, UserDetailsView> {
+class UserDetailsRenderer extends FlaxRenderer<UserDetailsModel, UserDetailsView, UserDetailsModel.UserDetailsFlaxState> {
 
     UserDetailsRenderer(UserDetailsView view) {
         super(view);
     }
 
     @Override
-    protected void modelUpdated(UserDetailsModel updatedModel) {
-        setName(updatedModel.getFirstName(), updatedModel.getLastName(), updatedModel.getTitle());
-        setLocation(updatedModel.getStreet(), updatedModel.getCity(), updatedModel.getState(), updatedModel.getPostCode());
-        setPicture(updatedModel.getLargePicture());
-        setPhone(updatedModel.getPhone());
+    protected void modelUpdated(UserDetailsModel.UserDetailsFlaxState updatedFlaxState) {
+        setName(updatedFlaxState.firstName, updatedFlaxState.lastName, updatedFlaxState.title);
+        setLocation(updatedFlaxState.street, updatedFlaxState.city, updatedFlaxState.state, updatedFlaxState.postalCode);
+        setPhone(updatedFlaxState.phone);
+        setPicture(updatedFlaxState.largePictureUrl);
     }
 
     private void setName(String firstName, String lastName, String title) {

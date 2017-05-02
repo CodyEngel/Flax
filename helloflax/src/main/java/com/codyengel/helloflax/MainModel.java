@@ -17,11 +17,12 @@
 package com.codyengel.helloflax;
 
 import com.codyengel.flax.FlaxModel;
+import com.codyengel.flax.FlaxState;
 
 /**
  * @author cody
  */
-public class MainModel extends FlaxModel<MainModel> {
+public class MainModel extends FlaxModel<MainModel, MainModel.MainFlaxState> {
 //  Public for Espresso tests, otherwise will give IllegalAccessException, feel free to make this better
 //  kind stranger on GitHub.
 
@@ -31,13 +32,24 @@ public class MainModel extends FlaxModel<MainModel> {
         super();
     }
 
+    @Override
+    protected MainModel.MainFlaxState getFlaxState() {
+        return new MainFlaxState(value == null ? 0 : value);
+    }
+
     void plus() {
         value++;
         notifyModelChanged();
     }
 
-    Integer getValue() {
-        return value;
+    final class MainFlaxState implements FlaxState<MainFlaxState> {
+
+        final Integer value;
+
+        MainFlaxState(Integer value) {
+            this.value = value;
+        }
+
     }
 
 }

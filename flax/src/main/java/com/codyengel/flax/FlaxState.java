@@ -14,21 +14,12 @@
  * limitations under the License.
  */
 
-package com.codyengel.helloflax;
-
-import com.codyengel.flax.FlaxRenderer;
+package com.codyengel.flax;
 
 /**
  * @author cody
  */
-class MainRenderer extends FlaxRenderer<MainModel, MainView, MainModel.MainFlaxState> {
 
-    MainRenderer(MainView view) {
-        super(view);
-    }
+public interface FlaxState<FS extends FlaxState> {
 
-    @Override
-    protected void modelUpdated(MainModel.MainFlaxState updatedFlaxState) {
-        getView().setText(String.valueOf(updatedFlaxState.value));
-    }
 }

@@ -17,13 +17,14 @@
 package com.codyengel.simplenetworking.ui.details;
 
 import com.codyengel.flax.FlaxModel;
+import com.codyengel.flax.FlaxState;
 import com.codyengel.simplenetworking.services.models.Result;
 import com.codyengel.simplenetworking.ui.UserModel;
 
 /**
  * @author cody
  */
-class UserDetailsModel extends FlaxModel<UserDetailsModel> {
+class UserDetailsModel extends FlaxModel<UserDetailsModel, UserDetailsModel.UserDetailsFlaxState> {
 
     private Result randomUserResult;
 
@@ -32,63 +33,38 @@ class UserDetailsModel extends FlaxModel<UserDetailsModel> {
         notifyModelChanged();
     }
 
+    @Override
+    protected UserDetailsFlaxState getFlaxState() {
+        return new UserDetailsFlaxState(randomUserResult);
+    }
+
     // FlaxRenderer Related Methods
     // We'll probably want to use something like ModelRenderer, then the FlaxRenderer won't interface
     // directly with our model since it doesn't need to call void the void methods found above.
 
-    String getTitle() {
-        if (randomUserResult == null) return "";
-        return randomUserResult.getName().getTitle();
-    }
+    class UserDetailsFlaxState implements FlaxState<UserDetailsFlaxState> {
 
-    String getFirstName() {
-        if (randomUserResult == null) return "";
-        return randomUserResult.getName().getFirst();
-    }
+        final String title;
+        final String firstName;
+        final String lastName;
+        final String street;
+        final String city;
+        final String state;
+        final String postalCode;
+        final String phone;
+        final String largePictureUrl;
 
-    String getLastName() {
-        if (randomUserResult == null) return "";
-        return randomUserResult.getName().getLast();
-    }
-
-    String getStreet() {
-        if (randomUserResult == null) return "";
-        return randomUserResult.getLocation().getStreet();
-    }
-
-    String getCity() {
-        if (randomUserResult == null) return "";
-        return randomUserResult.getLocation().getCity();
-    }
-
-    String getState() {
-        if (randomUserResult == null) return "";
-        return randomUserResult.getLocation().getState();
-    }
-
-    String getPostCode() {
-        if (randomUserResult == null) return "";
-        return String.valueOf(randomUserResult.getLocation().getPostcode());
-    }
-
-    String getThumbnailPicture() {
-        if (randomUserResult == null) return "";
-        return randomUserResult.getPicture().getThumbnail();
-    }
-
-    String getLargePicture() {
-        if (randomUserResult == null) return "";
-        return randomUserResult.getPicture().getLarge();
-    }
-
-    String getMediumPicture() {
-        if (randomUserResult == null) return "";
-        return randomUserResult.getPicture().getLarge();
-    }
-
-    String getPhone() {
-        if (randomUserResult == null) return "";
-        return randomUserResult.getPhone();
+        UserDetailsFlaxState(Result randomUserResult) {
+            title = randomUserResult != null ? randomUserResult.getName().getTitle() : "";
+            firstName = randomUserResult != null ? randomUserResult.getName().getFirst() : "";
+            lastName = randomUserResult != null ? randomUserResult.getName().getLast() : "";
+            street = randomUserResult != null ? randomUserResult.getLocation().getStreet() : "";
+            state = randomUserResult != null ? randomUserResult.getLocation().getState() : "";
+            city = randomUserResult != null ? randomUserResult.getLocation().getCity() : "";
+            postalCode = randomUserResult != null ? String.valueOf(randomUserResult.getLocation().getPostcode()) : "";
+            phone = randomUserResult != null ? randomUserResult.getPhone() : "";
+            largePictureUrl = randomUserResult != null ? randomUserResult.getPicture().getLarge() : "";
+        }
     }
 
 }
