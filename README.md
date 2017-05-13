@@ -23,7 +23,7 @@ So let's put these together with [Hello Flax](https://github.com/CodyEngel/Flax/
 ### MainActivity
 This makes use of ButterKnife things a little bit. The main thing to keep in mind is that we are implementing a View interface (hello Model-View-Presenter), and creating a MainRenderer as well as a MainResponderer. The Responder is responsible for responding to events from Android (in this case, clicks) and the Renderer is responsible for rendering our model updates on our View. Also keep in mind that the Responder and Renderer should be disposed when the onDestroy is called.
 
-```
+```java
 public class MainActivity extends AppCompatActivity implements MainView {
     @BindView(R.id.button) Button button;
     @BindView(R.id.text) TextView text;
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 ### MainRenderer
 The `Renderer` is responsible for taking model updates and updating our UI. In this example it takes `MainView` as the View and when `modelUpdated` is called we simply call the appropriate methods provided to us from `MainView`. In this example we care about the current value in our model (which is a number that is incremented when clicked).
 
-```
+```java
 class MainRenderer extends Renderer<MainModel, MainView> {
 
     public MainRenderer(MainView view) {
@@ -76,7 +76,7 @@ class MainRenderer extends Renderer<MainModel, MainView> {
 ### MainResponder
 The `Responder` needs to respond to events from the system. In this example we really only care about when we receive a click event so that we can notify the model to update itself, and you can see that in the actionReceived callback.
 
-```
+```java
 class MainResponder extends Responder<MainModel> {
 
     MainResponder(Observable<Action> actions) {
@@ -112,7 +112,7 @@ class MainResponder extends Responder<MainModel> {
 ### MainModel
 The `Model` is responsible for keeping the current state of our view. It is updated by the Responder and then rendered by the `Renderer`. It should extend from Model and the only internal method you need to be concerned about is `notifyModelChanged`, which should be called whenever you want to notify the `Renderer` of changes.
 
-```
+```java
 class MainModel extends Model<MainModel> {
 
     private Integer value = 0;
@@ -136,7 +136,7 @@ class MainModel extends Model<MainModel> {
 ### MainView
 Again, the View is just an interface which should be implemented by your `Activity`, `Fragment`, `View`, or whatever you are using for your view (it really shouldn't matter, if you experience issues, file an issue). If you have built an app using Model-View-Presenter this should be very familiar. In this example our `MainView` has a method `setText` which can be used to update the `text`.
 
-```
+```java
 interface MainView extends View {
 
     void setText(CharSequence text);
