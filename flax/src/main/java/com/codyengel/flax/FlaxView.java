@@ -19,5 +19,6 @@ package com.codyengel.flax;
 /**
  * @author cody
  */
+@Deprecated
 public interface FlaxView {
 }

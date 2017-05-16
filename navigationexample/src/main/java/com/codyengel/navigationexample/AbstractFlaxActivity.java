@@ -16,16 +16,34 @@
 
 package com.codyengel.navigationexample;
 
+import android.support.v7.app.AppCompatActivity;
+
+import com.codyengel.flax.action.FlaxActionReceivedCallback;
 import com.codyengel.flax.renderer.FlaxRenderer;
 import com.codyengel.flax.responder.FlaxResponder;
 
 /**
  * @author cody
  */
-public interface FlaxDelegate {
+public abstract class AbstractFlaxActivity extends AppCompatActivity implements FlaxDelegate {
 
-    FlaxRenderer createFlaxRenderer();
+    private FlaxActionReceivedCallback flaxActionReceivedCallback;
 
-    FlaxResponder createFlaxResponder();
+    private FlaxRenderer flaxRenderer;
+
+    private FlaxResponder flaxResponder;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (flaxResponder == null) {
+            flaxResponder = createFlaxResponder();
+            flaxActionReceivedCallback = flaxResponder.getFlaxActionReceivedCallback();
+        }
+
+        if (flaxRenderer == null) {
+            flaxRenderer = createFlaxRenderer();
+        }
+    }
 
 }

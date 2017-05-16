@@ -31,8 +31,11 @@ public abstract class FlaxModel<FS extends FlaxState> {
     private List<FlaxStateChangedCallback<FS>> flaxStateChangedCallbacks;
 
     public FlaxModel() {
+        flaxState = initialFlaxState();
         flaxStateChangedCallbacks = new ArrayList<>();
     }
+
+    protected abstract FS initialFlaxState();
 
     public void addFlaxStateChanged(FlaxStateChangedCallback<FS> flaxStateChangedCallback) {
         flaxStateChangedCallbacks.add(flaxStateChangedCallback);

@@ -22,6 +22,7 @@ import io.reactivex.subjects.BehaviorSubject;
 /**
  * @author cody
  */
+@Deprecated
 public abstract class FlaxModel<M extends FlaxModel, FS extends FlaxState> {
 
     private BehaviorSubject<FS> modelSubject;

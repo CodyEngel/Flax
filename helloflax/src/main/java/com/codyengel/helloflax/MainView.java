@@ -15,7 +15,7 @@
  */
 package com.codyengel.helloflax;
 
-import com.codyengel.flax.FlaxView;
+import com.codyengel.flax.view.FlaxView;
 
 /**
  * @author cody

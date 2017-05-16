@@ -19,7 +19,7 @@ package com.codyengel.flax;
 /**
  * @author cody
  */
-
+@Deprecated
 public interface FlaxState<FS extends FlaxState> {
 
 }

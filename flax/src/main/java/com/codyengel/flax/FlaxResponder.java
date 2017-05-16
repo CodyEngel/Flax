@@ -28,6 +28,7 @@ import io.reactivex.disposables.Disposable;
 /**
  * @author cody
  */
+@Deprecated
 public abstract class FlaxResponder<M extends FlaxModel> {
 
     private Disposable disposable;

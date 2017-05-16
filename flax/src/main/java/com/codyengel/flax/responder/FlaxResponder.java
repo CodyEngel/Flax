@@ -14,49 +14,34 @@
  * limitations under the License.
  */
 
-package com.codyengel.flax.renderer;
+package com.codyengel.flax.responder;
 
 import android.support.annotation.Nullable;
 
 import com.codyengel.flax.FlaxUtils;
+import com.codyengel.flax.action.FlaxActionReceivedCallback;
 import com.codyengel.flax.model.FlaxModel;
-import com.codyengel.flax.model.FlaxState;
 import com.codyengel.flax.store.FlaxStore;
-import com.codyengel.flax.view.FlaxView;
 
 /**
  * @author cody
  */
-public abstract class FlaxRenderer<FM extends FlaxModel, FS extends FlaxState, FV extends FlaxView>
-        implements FlaxState.FlaxStateChangedCallback<FS> {
+@Deprecated
+public abstract class FlaxResponder<FM extends FlaxModel> implements FlaxActionReceivedCallback {
 
-    private FV flaxView;
+    public FlaxResponder() {
 
-    @Nullable
-    private Integer modelKey;
-
-    public FlaxRenderer(FV flaxView) {
-        this(flaxView, null);
     }
 
-    public FlaxRenderer(FV flaxView, @Nullable Integer modelKey) {
-        this.flaxView = flaxView;
-        this.modelKey = modelKey;
-
-        //noinspection unchecked
-        getModel(modelKey).addFlaxStateChanged(this);
+    public FlaxActionReceivedCallback getFlaxActionReceivedCallback() {
+        return this;
     }
 
-    public void finished() {
-        //noinspection unchecked
-        getModel(modelKey).removeFlaxStateChanged(this);
+    protected FM getModel() {
+        return getModel(null);
     }
 
-    protected FV getView() {
-        return flaxView;
-    }
-
-    private FM getModel(@Nullable Integer modelKey) {
+    protected FM getModel(@Nullable Integer modelKey) {
         return FlaxStore.getModel(FlaxUtils.getModelClass(getClass(), 0), modelKey);
     }
 

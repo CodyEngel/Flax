@@ -19,6 +19,7 @@ package com.codyengel.flax;
 /**
  * @author cody
  */
+@Deprecated
 public class FlaxAction {
 
     public static final int SYSTEM_ACTION = -1;

@@ -24,6 +24,7 @@ import io.reactivex.disposables.Disposable;
 /**
  * @author cody
  */
+@Deprecated
 public abstract class FlaxRenderer<M extends FlaxModel, V extends FlaxView, FS extends FlaxState> {
 
     private Disposable disposable;

@@ -14,21 +14,27 @@
  * limitations under the License.
  */
 
-package com.codyengel.helloflax;
+package com.codyengel.flax.action;
 
-import com.codyengel.flax.renderer.FlaxRenderer;
+import android.support.annotation.Nullable;
+
+import com.codyengel.flax.FlaxUtils;
+import com.codyengel.flax.model.FlaxModel;
+import com.codyengel.flax.store.FlaxStore;
 
 /**
  * @author cody
  */
-class MainRenderer extends FlaxRenderer<MainModel, MainModel.MainFlaxState, MainView> {
+public abstract class FlaxAction<FM extends FlaxModel> {
 
-    MainRenderer(MainView view) {
-        super(view);
+    public abstract void perform(Object... arguments);
+
+    protected FM getModel() {
+        return getModel(null);
     }
 
-    @Override
-    public void flaxStateChanged(MainModel.MainFlaxState flaxState) {
-        getView().setText(String.valueOf(flaxState.value));
+    protected FM getModel(@Nullable Integer modelKey) {
+        return FlaxStore.getModel(FlaxUtils.getModelClass(getClass(), 0), modelKey);
     }
+
 }

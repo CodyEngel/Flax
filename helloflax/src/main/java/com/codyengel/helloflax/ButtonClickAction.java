@@ -16,19 +16,15 @@
 
 package com.codyengel.helloflax;
 
-import com.codyengel.flax.renderer.FlaxRenderer;
+import com.codyengel.flax.action.FlaxAction;
 
 /**
  * @author cody
  */
-class MainRenderer extends FlaxRenderer<MainModel, MainModel.MainFlaxState, MainView> {
 
-    MainRenderer(MainView view) {
-        super(view);
-    }
-
+public class ButtonClickAction extends FlaxAction<MainModel> {
     @Override
-    public void flaxStateChanged(MainModel.MainFlaxState flaxState) {
-        getView().setText(String.valueOf(flaxState.value));
+    public void perform(Object... arguments) {
+        getModel().plus();
     }
 }

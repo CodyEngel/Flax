@@ -27,6 +27,7 @@ import io.reactivex.Observable;
 /**
  * @author cody
  */
+@Deprecated
 public class FlaxActionObservableBuilder {
 
     private Observable<FlaxAction> actionObservable;

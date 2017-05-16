@@ -21,6 +21,7 @@ import java.util.HashMap;
 /**
  * @author cody
  */
+@Deprecated
 public class FlaxPayload {
 
     private HashMap<String, Object> payload;

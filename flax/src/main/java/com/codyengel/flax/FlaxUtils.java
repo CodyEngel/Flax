@@ -14,21 +14,23 @@
  * limitations under the License.
  */
 
-package com.codyengel.helloflax;
+package com.codyengel.flax;
 
-import com.codyengel.flax.renderer.FlaxRenderer;
+import com.codyengel.flax.model.FlaxModel;
+
+import java.lang.reflect.ParameterizedType;
 
 /**
  * @author cody
  */
-class MainRenderer extends FlaxRenderer<MainModel, MainModel.MainFlaxState, MainView> {
+public class FlaxUtils {
 
-    MainRenderer(MainView view) {
-        super(view);
+    public static<FM extends FlaxModel> Class getModelClass(Class superClass, int argumentPosition) {
+        //noinspection unchecked
+        return (Class<FM>) getParameterClass(superClass, argumentPosition);
     }
 
-    @Override
-    public void flaxStateChanged(MainModel.MainFlaxState flaxState) {
-        getView().setText(String.valueOf(flaxState.value));
+    private static Class getParameterClass(Class superClass, int argumentPosition) {
+        return (Class) ((ParameterizedType) superClass.getGenericSuperclass()).getActualTypeArguments()[argumentPosition];
     }
 }

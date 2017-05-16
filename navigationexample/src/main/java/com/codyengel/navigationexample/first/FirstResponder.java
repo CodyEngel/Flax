@@ -14,21 +14,20 @@
  * limitations under the License.
  */
 
-package com.codyengel.helloflax;
+package com.codyengel.navigationexample.first;
 
-import com.codyengel.flax.renderer.FlaxRenderer;
+import com.codyengel.flax.action.FlaxAction;
+import com.codyengel.flax.responder.FlaxResponder;
 
 /**
  * @author cody
  */
-class MainRenderer extends FlaxRenderer<MainModel, MainModel.MainFlaxState, MainView> {
 
-    MainRenderer(MainView view) {
-        super(view);
-    }
+public class FirstResponder extends FlaxResponder {
 
     @Override
-    public void flaxStateChanged(MainModel.MainFlaxState flaxState) {
-        getView().setText(String.valueOf(flaxState.value));
+    public void flaxActionReceived(FlaxAction flaxAction) {
+
     }
+
 }

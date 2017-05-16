@@ -39,6 +39,10 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -62,4 +66,11 @@ dependencies {
         exclude module: 'design'
         exclude module: 'recyclerview-v7'
     }
+}
+
+retrolambda {
+    javaVersion JavaVersion.VERSION_1_7
+    jvmArgs '-noverify'
+    defaultMethods false
+    incremental true
 }

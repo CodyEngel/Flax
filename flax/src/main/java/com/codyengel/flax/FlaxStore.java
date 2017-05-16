@@ -24,6 +24,7 @@ import java.util.Map;
 /**
  * @author cody
  */
+@Deprecated
 @SuppressLint("UseSparseArrays")
 class FlaxStore {
 

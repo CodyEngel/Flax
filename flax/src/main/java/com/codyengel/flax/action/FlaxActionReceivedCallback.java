@@ -14,21 +14,14 @@
  * limitations under the License.
  */
 
-package com.codyengel.helloflax;
-
-import com.codyengel.flax.renderer.FlaxRenderer;
+package com.codyengel.flax.action;
 
 /**
  * @author cody
  */
-class MainRenderer extends FlaxRenderer<MainModel, MainModel.MainFlaxState, MainView> {
+@Deprecated
+public interface FlaxActionReceivedCallback {
 
-    MainRenderer(MainView view) {
-        super(view);
-    }
+    void flaxActionReceived(FlaxAction flaxAction);
 
-    @Override
-    public void flaxStateChanged(MainModel.MainFlaxState flaxState) {
-        getView().setText(String.valueOf(flaxState.value));
-    }
 }
